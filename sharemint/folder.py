@@ -73,7 +73,10 @@ class Folder(CTX):
 
             return save_folder_path
 
-        except Exception as e:
+        except FileNotFoundError as e:
             print(f"Folder download failed! Please check if the folder exists. {e!r}")
-            traceback.print_exc()
+            return None
+
+        except Exception as e:
+            print(f"Folder download failed! {e!r}")
             return None
