@@ -7,6 +7,7 @@ from requests.exceptions import HTTPError
 from dateutil import parser
 from datetime import datetime
 from dateutil.parser import ParserError
+import logging
 
 
 class File(CTX):
@@ -47,10 +48,10 @@ class File(CTX):
                 return False
             return True
         except UnknownErrorOccured:
-            print('ClientContext Generation Failed!')
+            logging.error('ClientContext Generation Failed!')
             return False
         except Exception as e:
-            print(f'Unknown Error Occured! {e!r}')
+            logging.error(f'Unknown Error Occured! {e!r}')
             return False
         
 
@@ -97,15 +98,15 @@ class File(CTX):
                 _ = ctx.web.get_file_by_server_relative_path(file_url).download(local_file).execute_query()
             return save_path
         except FileNotFoundError:
-            print('Download Failed, Please check if the Folder Exists!')
+            logging.error('Download Failed, Please check if the Folder Exists!')
             traceback.print_exc()
         except HTTPError:
-            print('Download Failed, Please check the SharePoint file path. The path should be relative to SharePoint Documents Folder, E.g. Shared Documents/Folder/myfile.txt')
+            logging.error('Download Failed, Please check the SharePoint file path. The path should be relative to SharePoint Documents Folder, E.g. Shared Documents/Folder/myfile.txt')
             traceback.print_exc()
         except Exception as e:
-            print(f"Download Failed, {e!r}", file=sys.stderr)
+            logging.error(f"Download Failed, {e!r}", file=sys.stderr)
             traceback.print_exc()
-            print(traceback.format_exc())
+            logging.debug(traceback.format_exc())
         finally:
             return None
 
@@ -152,20 +153,18 @@ class File(CTX):
                     raise UnknownErrorOccured()
             except Exception:
                 raise UnknownErrorOccured()
-            
+            logging.info('File Uploaded Successfully!')
         except FileNotFoundError:
-            print('File Upload Failed, Please check the File Path!')
+            logging.error('File Upload Failed, Please check the File Path!')
             traceback.print_exc()
         except HTTPError:
-            print('File Upload Failed, Please check the SharePoint Folder path. The path should be relative to SharePoint Documents Folder, E.g. Shared Documents/Folder')
+            logging.error('File Upload Failed, Please check the SharePoint Folder path. The path should be relative to SharePoint Documents Folder, E.g. Shared Documents/Folder')
             traceback.print_exc()
         except UnknownErrorOccured:
-            print('File Upload Failed, Something Went Wrong... Please try after some time!')
+            logging.error('File Upload Failed, Something Went Wrong... Please try after some time!')
         except Exception as e:
-            print('Check if the Folder exists in SharePoint!')
-            print(f"File Upload Failed, {e!r}", file=sys.stderr)
-        else:
-            print('File Uploaded Successfully!')
+            logging.error('Check if the Folder exists in SharePoint!')
+            logging.error(f"File Upload Failed, {e!r}", file=sys.stderr)
 
 
     def delete_file(self, file_path:str):
@@ -196,12 +195,12 @@ class File(CTX):
             ctx = self.get_ctx()
             file = ctx.web.get_file_by_server_relative_url(file_site_path)
             file.delete_object().execute_query()
+            logging.info('File Deleted Successfully!')
         except UnknownErrorOccured:
-            print('File Delete Failed, Please check if File Exists!!')
+            logging.error('File Delete Failed, Please check if File Exists!!')
         except Exception as e:
-            print(f"File Delete Failed, {e!r}", file=sys.stderr)
-        else:
-            print('File Deleted Successfully!')
+            logging.error(f"File Delete Failed, {e!r}", file=sys.stderr)
+            
 
 
     def get_updated_files_path(self, created_datetime_utc=None):
@@ -251,12 +250,12 @@ class File(CTX):
                     file_path_list+=['/'.join(file_url.split('/')[3:])]
             return file_path_list
         except ParserError as e:
-            print(f"Operation Failed! Date String Passed doesn't contain valid DateTime {e!r}")
+            logging.error(f"Operation Failed! Date String Passed doesn't contain valid DateTime {e!r}")
             traceback.print_exc()
         except UnknownErrorOccured as e:
-            print(f"Operation Failed! {e!r}")
+            logging.error(f"Operation Failed! {e!r}")
             traceback.print_exc()
         except Exception as e:
-            print(f"Operation Failed! Got Unknown Error {e!r}")
+            logging.error(f"Operation Failed! Got Unknown Error {e!r}")
             traceback.print_exc()
         return []
