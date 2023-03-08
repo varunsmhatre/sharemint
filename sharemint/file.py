@@ -98,15 +98,15 @@ class File(CTX):
                 _ = ctx.web.get_file_by_server_relative_path(file_url).download(local_file).execute_query()
             return save_path
         except FileNotFoundError:
-            print('Download Failed, Please check if the Folder Exists!')
+            logging.error('Download Failed, Please check if the Folder Exists!')
             traceback.print_exc()
         except HTTPError:
-            print('Download Failed, Please check the SharePoint file path. The path should be relative to SharePoint Documents Folder, E.g. Shared Documents/Folder/myfile.txt')
+            logging.error('Download Failed, Please check the SharePoint file path. The path should be relative to SharePoint Documents Folder, E.g. Shared Documents/Folder/myfile.txt')
             traceback.print_exc()
         except Exception as e:
-            print(f"Download Failed, {e!r}", file=sys.stderr)
+            logging.error(f"Download Failed, {e!r}", file=sys.stderr)
             traceback.print_exc()
-            print(traceback.format_exc())
+            logging.debug(traceback.format_exc())
         finally:
             return None
 
