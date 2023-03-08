@@ -12,6 +12,9 @@ _from sharemint import ShareMint_
 
 _my_website = ShareMint(client_id=client_id, client_secret_key=client_secret, site_url=site_url)_
 
+E.g. site_url: _https://mydomainnamexyz.sharepoint.com/sites/website_name_
+
+
 
 
 # Methods Supported Currently:
