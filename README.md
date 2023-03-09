@@ -25,16 +25,17 @@ my_website = ShareMint(client_id=client_id, client_secret_key=client_secret, sit
 E.g. site_url: https://mydomainnamexyz.sharepoint.com/sites/website_name
 
 
-# Methods Supported Currently:
--------
-1] file_exists(file_site_path) -> bool ( Tells if a file exists in SharePoint Folder ) 
+# Supported Methods
+ShareMint currently supports the following methods:
 
-2] download_file(file_site_path, save_folder_path) -> str ( Downloads file to local folder )
+* file_exists(file_site_path) -> bool ( Tells if a file exists in SharePoint Folder ) 
 
-3] upload_file(device_file_path, sharepoint_folder_path) -> None ( Uploads File to a SharePoint Folder )
+* download_file(file_site_path, save_folder_path) -> str ( Downloads file to local folder )
 
-4] delete_file(file_path) -> None ( Deletes a file from a SharePoint Folder )
+* upload_file(device_file_path, sharepoint_folder_path) -> None ( Uploads File to a SharePoint Folder )
 
-5] get_updated_files_path(created_datetime_utc: str|datetime ) -> list ( Return list of files created>=created_datetime_utc )
+* delete_file(file_path) -> None ( Deletes a file from a SharePoint Folder )
 
-6] download_folder(self, site_folder_path:str, download_folder_path=str) -> str ( Downloads folder from sharepoint and returns the downloaded folder path )
+* get_updated_files_path(created_datetime_utc: str|datetime ) -> list ( Return list of files created>=created_datetime_utc )
+
+* download_folder(self, site_folder_path:str, download_folder_path=str) -> str ( Downloads folder from sharepoint and returns the downloaded folder path )
