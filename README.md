@@ -1,20 +1,28 @@
-# sharemint
-A Python Package to interact with SharePoint Folders &amp; Files
+# ShareMint: A Python Package for Easy SharePoint Interaction
 
-ShareMint is a Higher Level Package built on top of Office365-REST-Python-Client (https://github.com/vgrem/Office365-REST-Python-Client) with the aim of providing an easy Interaction with SharePoint Website Folders.
+ShareMint is a Python package that provides a higher-level interface to interact with SharePoint folders and files. Built on top of the Office365-REST-Python-Client, ShareMint aims to simplify SharePoint website folder interaction.(https://github.com/vgrem/Office365-REST-Python-Client)
 
-# Installation: 
+
+# Installation
+You can easily install ShareMint using pip:
+
+```
 pip install sharemint
-(URL: https://pypi.org/project/sharemint/)
+```
 
-# Import: 
-_from sharemint import ShareMint_
-
-_my_website = ShareMint(client_id=client_id, client_secret_key=client_secret, site_url=site_url)_
-
-E.g. site_url: _https://mydomainnamexyz.sharepoint.com/sites/website_name_
+You can also find the package on PyPI at: https://pypi.org/project/sharemint/
 
 
+# Usage
+To use ShareMint, you first need to import it using: 
+
+```
+from sharemint import ShareMint
+
+my_website = ShareMint(client_id=client_id, client_secret_key=client_secret, site_url=site_url)
+```
+
+E.g. site_url: https://mydomainnamexyz.sharepoint.com/sites/website_name
 
 
 # Methods Supported Currently:
