@@ -23,8 +23,10 @@ my_website = ShareMint(client_id=client_id, client_secret_key=client_secret, sit
 ```
 
 E.g. site_url: https://mydomainnamexyz.sharepoint.com/sites/website_name
+
 To generate Client Credentials for your SharePoint Website, please check the below resource metioned below:
-URL https://faun.pub/quick-etl-with-python-part-1-download-files-from-sharepoint-online-40bf23711662
+
+URL: https://faun.pub/quick-etl-with-python-part-1-download-files-from-sharepoint-online-40bf23711662
 
 
 # Supported Methods
